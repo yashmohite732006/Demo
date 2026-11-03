@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>R Physio Clinic | Home</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Open Sans', 'sans-serif'] },
+          colors: {
+            brand: {
+              50: '#f5f7f5',
+              100: '#edf1ee',
+              200: '#dfe9df',
+              500: '#667a66',
+              600: '#4d604d',
+              700: '#394a39',
+              800: '#273727',
+              900: '#182518'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    img {
+      filter: sepia(0.22) saturate(1.35) contrast(1.08) brightness(0.96) hue-rotate(-12deg);
+    }
+    .indian-glow {
+      background: linear-gradient(135deg, rgba(143, 74, 27, 0.18), rgba(24, 37, 24, 0.12));
+    }
+    .review-viewport {
+      overflow: hidden;
+      border-radius:2rem;
+    }
+    .review-track {
+      display: flex;
+      gap: 0.75rem;
+      transform: translateX(0);
+      transition: none;
+      will-change: transform;
+    }
+    .review-card {
+      flex: 0 0 calc(100% - 0.75rem);
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .review-track {
+        transition: none;
+      }
+    }
+    
+  body {
+    background-image: url('webbgimage.webp');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(247, 245, 242, 0.93);
+    z-index: -1;
+  }
+  html { overflow-x: hidden; }
+  header > div:first-child > a:first-child { position: relative; width: 9rem; height: 3rem; align-items: center; }
+  .site-logo { position: absolute; left: 0; top: 50%; display: block; width: auto; height: 13rem; max-width: 14rem; object-fit: contain; transform: translateY(-50%); }
+  .mobile-menu { display: none; }
+  @media (max-width: 767px) {
+    body { background-attachment: scroll; }
+    header > div:first-child { padding: 0.75rem 1rem; display: block; position: relative; }
+    header > div:first-child > a:first-child { width: 7rem; height: 2.5rem; }
+    .site-logo { height: 10rem; max-width: 14rem; }
+    .mobile-menu { display: block; position: fixed; top: 0.75rem; right: 1rem; z-index: 50; width: 2.5rem; }
+    .mobile-menu summary { width: 2.5rem; height: 2.5rem; border-radius: 999px; background: #edf1ee; color: #273727; display: flex; align-items: center; justify-content: center; cursor: pointer; list-style: none; }
+    .mobile-menu summary::-webkit-details-marker { display: none; }
+    .mobile-menu summary i { font-size: 1.15rem; }
+    .mobile-nav { position: fixed; top: 0; left: 0; display: flex; flex-direction: column; gap: 0.5rem; padding: 5rem 1rem 1rem; width: min(17rem, 82vw); height: 100vh; border: 0; border-right: 1px solid #dfe9df; border-radius: 0; background: rgba(255, 255, 255, 0.98); box-shadow: 8px 0 30px rgba(24, 37, 24, 0.16); transform: translateX(-105%); transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1); will-change: transform; z-index: 49; }
+    .mobile-menu[open] .mobile-nav { transform: translateX(0); }
+    .mobile-drawer-logo { position: absolute; top: 0.75rem; left: 1rem; width: auto; height: 3.25rem; max-width: 6rem; object-fit: contain; }
+    .mobile-close { position: absolute; top: 1rem; right: 1rem; width: 2.5rem; height: 2.5rem; border: 0; border-radius: 999px; background: #edf1ee; color: #273727; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+    .mobile-close i { font-size: 1rem; }
+    .mobile-nav a { padding: 0.75rem 0.85rem; border-radius: 0.65rem; background: #edf1ee; color: #394a39; font-size: 1rem; text-align: left; font-weight: 600; }
+    .mobile-nav .mobile-appointment { margin-top: auto; background: #273727; color: #fff; text-align: center; font-weight: 600; }
+    .mobile-socials { display: flex; justify-content: center; gap: 0.65rem; padding-top: 0.75rem; border-top: 1px solid #dfe9df; }
+    .mobile-socials a { width: 2.25rem; height: 2.25rem; padding: 0; display: flex; align-items: center; justify-content: center; border-radius: 999px; background: #273727; color: #fff; text-align: center; }
+    main { padding-left: 1rem !important; padding-right: 1rem !important; padding-top: 3rem !important; padding-bottom: 3rem !important; }
+    main h1 { font-size: clamp(2rem, 10vw, 2.75rem) !important; line-height: 1.08 !important; overflow-wrap: anywhere; }
+    main h2 { overflow-wrap: anywhere; }
+    main img { max-width: 100%; max-height: 26rem; }
+    .review-card { padding: 1rem !important; }
+    .review-card footer { flex-direction: column; align-items: flex-start; }
+    #reviews-carousel { width: calc(100% + 2.5rem); margin-left: -1.25rem; margin-right: -1.25rem; }
+    #reviews-carousel > .flex.items-center { flex-wrap: wrap; gap: 0.6rem; }
+    #reviews-carousel .review-viewport { order: 1; flex-basis: 100%; width: 100%; border-radius: 1.25rem; }
+    #reviews-carousel #review-prev, #reviews-carousel #review-next { order: 2; margin-top: 0.25rem; }
+    #reviews-carousel #review-prev { margin-left: auto; }
+    #reviews-carousel #review-next { margin-right: auto; }
+    #reviews-carousel .review-track { gap: 0; }
+    #reviews-carousel .review-card { flex-basis: 100%; border-radius: 1.25rem; }
+    footer p { overflow-wrap: anywhere; }
+    footer .flex.space-x-6 { flex-wrap: wrap; justify-content: center; gap: 0.75rem 1.25rem; }
+  }
+</style>
+  </style>
+</head>
+<body class="bg-[#f7f5f2] text-slate-800 font-sans">
+  <header class="border-b border-slate-200 bg-white/90 sticky top-0 z-40 backdrop-blur-sm">
+    <div class="max-w-7xl mx-auto px-5 py-4 grid grid-cols-[1fr_auto_1fr] items-center gap-4">
+      <a href="index.html" class="flex items-center gap-3 justify-self-start">
+        <img src="PhySio-optimized.png" alt="R Physio Clinic" class="site-logo" />
+      </a>
+      <nav class="hidden md:flex items-center gap-8 text-sm text-slate-600 justify-self-center">
+        <a href="index.html" class="text-brand-800 font-medium">Home</a>
+        <a href="about.html" class="hover:text-brand-800 transition">About</a>
+        <a href="services.html" class="hover:text-brand-800 transition">Services</a>
+        <a href="approach.html" class="hover:text-brand-800 transition">Approach</a>
+        <a href="contact.html" class="hover:text-brand-800 transition">Contact</a>
+      </nav>
+      <a href="contact.html" class="hidden sm:inline-flex items-center gap-2 rounded-full border border-brand-700 text-brand-800 px-4 py-2 text-sm font-medium hover:bg-brand-800 hover:text-white transition justify-self-end">Book an appointment</a>
+    </div>
+    <details class="mobile-menu">
+      <summary aria-label="Open navigation menu"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></summary>
+      <nav class="mobile-nav" aria-label="Mobile navigation">
+        <button type="button" class="mobile-close" onclick="this.closest('details').open = false;" aria-label="Close navigation menu"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+        <img src="PhySionew-optimized.png" alt="R Physio Clinic" class="mobile-drawer-logo" />
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="approach.html">Approach</a>
+        <a href="contact.html">Contact</a>
+        <a href="contact.html" class="mobile-appointment">Book an appointment</a>
+        <div class="mobile-socials" aria-label="Social media links">
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
+        </div>
+      </nav>
+    </details>
+  </header>
+
+  <main>
+    <section class="relative overflow-hidden rounded-[2rem] max-w-7xl mx-auto px-5 py-16 md:py-20 my-10">
+      <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('mainbgimage.jpg');"></div>
+      <div class="absolute inset-0 bg-gradient-to-r from-[#182518]/90 via-[#182518]/75 to-[#182518]/35"></div>
+
+      <div class="relative grid md:grid-cols-2 gap-10 items-center">
+        <div class="text-white">
+          <p class="text-[11px] uppercase tracking-[0.2em] text-brand-100 font-semibold">Modern physiotherapy</p>
+          <h1 class="mt-4 text-4xl md:text-6xl font-bold tracking-[-0.06em] leading-none">Move better. Feel stronger.</h1>
+          <p class="mt-6 text-lg text-white/80 leading-8">We help you recover from pain, improve mobility, and build lasting strength with personalised physiotherapy care designed around your goals.</p>
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a href="services.html" class="rounded-full bg-white text-brand-900 px-6 py-3 font-medium hover:bg-brand-100 transition shadow-lg">Explore services</a>
+            <a href="contact.html" class="rounded-full border border-white/60 text-white px-6 py-3 font-medium hover:bg-white hover:text-brand-900 transition">Book a consultation</a>
+          </div>
+          <div class="mt-8 flex gap-8 text-sm text-white/80">
+            <div><span class="block text-2xl font-bold text-white">1.2k+</span> patients supported</div>
+            <div><span class="block text-2xl font-bold text-white">12 yrs</span> collective experience</div>
+          </div>
+        </div>
+
+        <div class="relative flex justify-end">
+          <div class="w-full max-w-md rounded-[2rem] bg-white/10 backdrop-blur-md border border-white/20 p-5 shadow-[0_25px_80px_rgba(0,0,0,0.25)]">
+            <div class="rounded-[1.5rem] overflow-hidden border border-white/10 indian-glow">
+              <img src="mainimage.png" alt="Premium physiotherapy care" class="indian-image w-full h-[350px] object-cover" />
+            </div>
+            <div class="mt-5 flex items-center justify-between gap-4 rounded-2xl bg-white/10 border border-white/10 p-4 text-white">
+              <div>
+                <div class="text-xs uppercase tracking-[0.18em] text-white/70">Patient rating</div>
+                <div class="text-2xl font-bold">4.8/5</div>
+              </div>
+              <div class="w-12 h-12 rounded-full bg-white text-brand-900 flex items-center justify-center"><i class="fa-solid fa-star"></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-5 py-16">
+      
+      <div class="relative max-w-7xl mx-auto px-5">
+        <div class="text-center max-w-2xl mx-auto">
+          <p class="text-[11px] uppercase tracking-[0.2em] text-brand-600 font-semibold">What we do</p>
+          <h2 class="mt-3 text-3xl md:text-4xl font-bold tracking-[-0.05em] text-brand-900">Care that fits your real life</h2>
+        </div>
+
+        <div class="mt-10 grid md:grid-cols-3 gap-6">
+          <div class="group overflow-hidden rounded-[2rem] border border-slate-200 bg-[#273727] shadow-sm hover:shadow-xl transition duration-300">
+            <div class="h-48 overflow-hidden indian-glow">
+              <img src="sportsimage.webp" alt="Sports recovery" class="indian-image w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+            </div>
+            <div class="p-6">
+              <div class="w-12 h-12 rounded-xl bg-brand-100 text-brand-800 flex items-center justify-center mb-4"><i class="fa-solid fa-person-running"></i></div>
+              <h3 class="text-xl font-semibold text-white">Sports recovery</h3>
+              <p class="mt-3 text-white/80 leading-7">Rebuild confidence, strength, and movement after injury or sports strain.</p>
+            </div>
+          </div>
+          <div class="group overflow-hidden rounded-[2rem] border border-slate-200 bg-[#273727] shadow-sm hover:shadow-xl transition duration-300">
+            <div class="h-48 overflow-hidden indian-glow">
+              <img src="mobilityimage.jpg" alt="Mobility support" class="indian-image w-full h-400 object-cover group-hover:scale-105 transition duration-500" />
+            </div>
+            <div class="p-6">
+              <div class="w-12 h-12 rounded-xl bg-brand-100 text-brand-800 flex items-center justify-center mb-4"><i class="fa-solid fa-wheelchair"></i></div>
+              <h3 class="text-xl font-semibold text-white">Mobility support</h3>
+              <p class="mt-3 text-white/80 leading-7">Reduce stiffness, improve range of motion, and regain comfortable movement.</p>
+            </div>
+          </div>
+          <div class="group overflow-hidden rounded-[2rem] border border-slate-200 bg-[#273727] shadow-sm hover:shadow-xl transition duration-300">
+            <div class="h-48 overflow-hidden indian-glow">
+              <img src="painimage.webp" alt="Pain management" class="indian-image w-full h-full object-cover group-hover:scale-105 transition duration-500" />
+            </div>
+            <div class="p-6">
+              <div class="w-12 h-12 rounded-xl bg-brand-100 text-brand-800 flex items-center justify-center mb-4"><i class="fa-solid fa-heart-pulse"></i></div>
+              <h3 class="text-xl font-semibold text-white">Pain management</h3>
+              <p class="mt-3 text-white/80 leading-7">Create a targeted plan to relieve pain and support lasting recovery.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-5 py-16">
+      <div class="grid md:grid-cols-[1fr_1.1fr] gap-10 items-center">
+        <div>
+          <p class="text-[11px] uppercase tracking-[0.2em] text-brand-600 font-semibold">Why choose us</p>
+          <h2 class="mt-3 text-3xl md:text-4xl font-bold tracking-[-0.05em] text-brand-900">Personal treatment with measurable progress.</h2>
+          <ul class="mt-8 space-y-5 text-slate-600 text-lg">
+            <li class="flex gap-4"><span class="text-brand-800 mt-1"><i class="fa-solid fa-check"></i></span><span>One-to-one assessment and treatment plans tailored to your condition.</span></li>
+            <li class="flex gap-4"><span class="text-brand-800 mt-1"><i class="fa-solid fa-check"></i></span><span>Clear guidance on movement, recovery milestones, and home exercises.</span></li>
+            <li class="flex gap-4"><span class="text-brand-800 mt-1"><i class="fa-solid fa-check"></i></span><span>Supportive care designed to help you move with greater ease every week.</span></li>
+          </ul>
+        </div>
+        <div class="relative rounded-[2rem] overflow-hidden shadow-[0_35px_80px_rgba(23,37,24,0.18)] indian-glow">
+          <img src="recoveryimage.jpg" alt="Premium rehabilitation and anatomy support" class="indian-image w-full h-[420px] object-cover" />
+          <div class="absolute inset-0 bg-gradient-to-r from-brand-900/80 to-[#5e3a1b]/35"></div>
+          <div class="absolute inset-0 p-8 md:p-10 flex flex-col justify-end text-white">
+            <h3 class="text-2xl font-semibold">Recovery is not one-size-fits-all.</h3>
+            <p class="mt-4 text-brand-100 leading-8 max-w-lg">We combine assessment, hands-on treatment, guided exercise, and long-term strategy to help you build strength that lasts beyond the clinic.</p>
+            <div class="mt-8 grid grid-cols-2 gap-5 max-w-md">
+              <div class="rounded-2xl bg-white/10 backdrop-blur-sm p-4 border border-white/10">
+                <div class="text-2xl font-bold">90%</div>
+                <div class="text-sm text-brand-100">patient satisfaction</div>
+              </div>
+              <div class="rounded-2xl bg-white/10 backdrop-blur-sm p-4 border border-white/10">
+                <div class="text-2xl font-bold">3x</div>
+                <div class="text-sm text-brand-100">faster movement gains</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-5 py-16">
+      <div class="max-w-7xl mx-auto px-5">
+        <div class="text-center max-w-2xl mx-auto">
+          <p class="text-[11px] uppercase tracking-[0.2em] text-brand-600 font-semibold">Testimonials</p>
+          <h2 class="mt-3 text-3xl md:text-4xl font-bold tracking-[-0.05em] text-brand-900">Patients feel the difference.</h2>
+        </div>
+        <div id="reviews-carousel" class="mt-10 max-w-6xl mx-auto" aria-live="polite">
+          <div class="flex items-center gap-3 md:gap-5">
+            <button id="review-prev" type="button" class="shrink-0 w-11 h-11 md:w-12 md:h-12 rounded-full border border-brand-200 bg-white text-brand-800 shadow-sm hover:bg-brand-800 hover:text-white transition" aria-label="Previous review">
+              <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+            </button>
+            <div class="review-viewport min-w-0 flex-1">
+              <div class="review-track">
+                <blockquote class="review-card border border-slate-200 rounded-[2rem] p-8 md:p-10 bg-white/85">
+                  <div class="flex items-center justify-between gap-4">
+                    <div class="flex gap-1 text-[#c08a3e]" aria-label="5 out of 5 stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <i class="fa-solid fa-quote-right text-3xl text-brand-200" aria-hidden="true"></i>
+                  </div>
+                  <p class="mt-6 text-xl md:text-2xl leading-relaxed text-brand-900">“The team helped me get back to running without the pain I had for months.”</p>
+                  <footer class="mt-8 flex items-center justify-between gap-4 text-sm"><span class="font-semibold text-brand-900">Mrs. Nishu Suryawanshi</span><span class="text-slate-500">Sports recovery · Verified patient</span></footer>
+                </blockquote>
+                <blockquote class="review-card border border-slate-200 rounded-[2rem] p-8 md:p-10 bg-white/85">
+                  <div class="flex items-center justify-between gap-4"><div class="flex gap-1 text-[#c08a3e]" aria-label="5 out of 5 stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><i class="fa-solid fa-quote-right text-3xl text-brand-200" aria-hidden="true"></i></div>
+                  <p class="mt-6 text-xl md:text-2xl leading-relaxed text-brand-900">“Every session felt clear, supportive, and focused on what I actually needed.”</p>
+                  <footer class="mt-8 flex items-center justify-between gap-4 text-sm"><span class="font-semibold text-brand-900">Mr. Yash Mohite</span><span class="text-slate-500">Mobility support · Verified patient</span></footer>
+                </blockquote>
+                <blockquote class="review-card border border-slate-200 rounded-[2rem] p-8 md:p-10 bg-white/85">
+                  <div class="flex items-center justify-between gap-4"><div class="flex gap-1 text-[#c08a3e]" aria-label="5 out of 5 stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><i class="fa-solid fa-quote-right text-3xl text-brand-200" aria-hidden="true"></i></div>
+                  <p class="mt-6 text-xl md:text-2xl leading-relaxed text-brand-900">“I finally have a plan I can follow and a stronger, more confident body.”</p>
+                  <footer class="mt-8 flex items-center justify-between gap-4 text-sm"><span class="font-semibold text-brand-900">Mr. Neel Phadol</span><span class="text-slate-500">Pain management · Verified patient</span></footer>
+                </blockquote>
+                <blockquote class="review-card border border-slate-200 rounded-[2rem] p-8 md:p-10 bg-white/85">
+                  <div class="flex items-center justify-between gap-4"><div class="flex gap-1 text-[#c08a3e]" aria-label="5 out of 5 stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><i class="fa-solid fa-quote-right text-3xl text-brand-200" aria-hidden="true"></i></div>
+                  <p class="mt-6 text-xl md:text-2xl leading-relaxed text-brand-900">“After my shoulder injury, the progress was steady, measurable, and genuinely encouraging.”</p>
+                  <footer class="mt-8 flex items-center justify-between gap-4 text-sm"><span class="font-semibold text-brand-900">Ms. Rhea Kapoor</span><span class="text-slate-500">Orthopaedic rehabilitation · Verified patient</span></footer>
+                </blockquote>
+                <blockquote class="review-card border border-slate-200 rounded-[2rem] p-8 md:p-10 bg-white/85">
+                  <div class="flex items-center justify-between gap-4"><div class="flex gap-1 text-[#c08a3e]" aria-label="5 out of 5 stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><i class="fa-solid fa-quote-right text-3xl text-brand-200" aria-hidden="true"></i></div>
+                  <p class="mt-6 text-xl md:text-2xl leading-relaxed text-brand-900">“The care felt personal from day one. I can now move through my workday comfortably again.”</p>
+                  <footer class="mt-8 flex items-center justify-between gap-4 text-sm"><span class="font-semibold text-brand-900">Mr. Arjun Mehta</span><span class="text-slate-500">Posture and movement · Verified patient</span></footer>
+                </blockquote>
+                <blockquote class="review-card border border-slate-200 rounded-[2rem] p-8 md:p-10 bg-white/85">
+                  <div class="flex items-center justify-between gap-4"><div class="flex gap-1 text-[#c08a3e]" aria-label="5 out of 5 stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div><i class="fa-solid fa-quote-right text-3xl text-brand-200" aria-hidden="true"></i></div>
+                  <p class="mt-6 text-xl md:text-2xl leading-relaxed text-brand-900">“A thoughtful team, a clear recovery plan, and results I could feel every single week.”</p>
+                  <footer class="mt-8 flex items-center justify-between gap-4 text-sm"><span class="font-semibold text-brand-900">Mrs. Kavita Rao</span><span class="text-slate-500">Strength and conditioning · Verified patient</span></footer>
+                </blockquote>
+              </div>
+            </div>
+            <button id="review-next" type="button" class="shrink-0 w-11 h-11 md:w-12 md:h-12 rounded-full border border-brand-200 bg-white text-brand-800 shadow-sm hover:bg-brand-800 hover:text-white transition" aria-label="Next review">
+              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="mt-6 flex items-center justify-center gap-3" role="tablist" aria-label="Review slides">
+            <button class="review-dot h-2.5 w-8 rounded-full bg-brand-800 transition-all" type="button" role="tab" aria-label="Show review 1" aria-selected="true"></button>
+            <button class="review-dot h-2.5 w-2.5 rounded-full bg-brand-200 transition-all" type="button" role="tab" aria-label="Show review 2" aria-selected="false"></button>
+            <button class="review-dot h-2.5 w-2.5 rounded-full bg-brand-200 transition-all" type="button" role="tab" aria-label="Show review 3" aria-selected="false"></button>
+            <button class="review-dot h-2.5 w-2.5 rounded-full bg-brand-200 transition-all" type="button" role="tab" aria-label="Show review 4" aria-selected="false"></button>
+            <button class="review-dot h-2.5 w-2.5 rounded-full bg-brand-200 transition-all" type="button" role="tab" aria-label="Show review 5" aria-selected="false"></button>
+            <button class="review-dot h-2.5 w-2.5 rounded-full bg-brand-200 transition-all" type="button" role="tab" aria-label="Show review 6" aria-selected="false"></button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+<footer id="contact" class="bg-brand-900 text-white border-t border-brand-800 pt-10 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-brand-700/60">
+
+                <!-- Branding Info -->
+                <div class="lg:col-span-4 space-y-3">
+                    <div class="flex items-center">
+                     <img src="Whitelogo.png" alt="R Physio Clinic" class="h-30 w-auto max-w-[11rem] object-contain" />
+                    </div>
+                    <p class="text-xs text-brand-100/70 leading-relaxed">
+                        Dedicated to advanced clinical rehabilitation, sports trauma recovery, and osteopathic bodywork.
+                        Restoring physical confidence through evidence-based care.
+                    </p>
+                    <div class="flex space-x-3 text-brand-100/70 pt-2">
+                        <a href="#"
+                            class="w-9 h-9 rounded-full bg-brand-800 flex items-center justify-center hover:bg-[#8f4a1b] hover:text-white transition"><i
+                                class="fa-brands fa-facebook-f text-xs"></i></a>
+                        <a href="#"
+                            class="w-9 h-9 rounded-full bg-brand-800 flex items-center justify-center hover:bg-[#8f4a1b] hover:text-white transition"><i
+                                class="fa-brands fa-instagram text-xs"></i></a>
+                        <a href="#"
+                            class="w-9 h-9 rounded-full bg-brand-800 flex items-center justify-center hover:bg-[#8f4a1b] hover:text-white transition"><i
+                                class="fa-brands fa-youtube text-xs"></i></a>
+                        <a href="#"
+                            class="w-9 h-9 rounded-full bg-brand-800 flex items-center justify-center hover:bg-[#8f4a1b] hover:text-white transition"><i
+                                class="fa-brands fa-linkedin-in text-xs"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="lg:col-span-2 space-y-3">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-[#d6a15d]">Quick Links</h4>
+                    <ul class="space-y-2 text-xs text-brand-100/80">
+                        <li><a href="about.html" class="hover:text-white transition">About R Physio</a></li>
+                        <li><a href="services.html" class="hover:text-white transition">All Services</a></li>
+                        <li><a href="approach.html" class="hover:text-white transition">Our Care Approach</a></li>
+                        <li><a href="contact.html" class="hover:text-white transition">Clinic Information</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact & Hours -->
+                <div class="lg:col-span-3 space-y-3">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-[#d6a15d]">Clinic Hours & Contact</h4>
+                    <ul class="space-y-2.5 text-xs text-brand-100/80">
+                        <li class="flex items-start"><i
+                                class="fa-solid fa-location-dot text-brand-500 mr-2.5 mt-0.5"></i>5th floor, Shree ganesh universe, pipeline road, Gangapur Rd, Nashik, Maharashtra 422013</li>
+                        <li class="flex items-center"><i class="fa-solid fa-phone text-brand-500 mr-2.5"></i> +91 9130341817</li>
+                        <li class="flex items-center"><i class="fa-solid fa-envelope text-brand-500 mr-2.5"></i>
+                            care@rphysioclinic.com</li>
+                        <li class="flex items-center"><i class="fa-solid fa-clock text-brand-500 mr-2.5"></i> Mon - Sat:
+                            8:00 AM - 8:00 PM</li>
+                    </ul>
+                </div>
+
+                <!-- Map Placeholder -->
+                <div class="lg:col-span-3 space-y-3">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-[#d6a15d]">Location Map</h4>
+                    <a href="https://www.google.com/maps/place/R+Physio+care/@20.0100802,73.7436304,18.27z/data=!4m6!3m5!1s0x3bdded4e843d896f:0xeb2937d9f452d52d!8m2!3d20.0099227!4d73.744668!16s%2Fg%2F11p1bwzsr7!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDkyMy4wIKXMDSoASAFQAw%3D%3D" aria-label="Open R Physio Clinic in Google Maps"
+                      class="rounded-2xl overflow-hidden border border-brand-700 bg-brand-800 h-32 flex items-center justify-center relative group">
+                        <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=400&q=80"
+                            alt="Map Location"
+                            class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-brand-900/55 flex items-center justify-center">
+                            <span
+                                class="text-xs font-semibold px-3 py-1.5 rounded-full bg-brand-900/85 text-white border border-brand-700">
+                                <i class="fa-solid fa-map-pin text-rose-500 mr-1"></i> Open Google Maps
+                            </span>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Bottom Copyright -->
+            <div class="pt-8 flex flex-col sm:flex-row justify-between items-center text-[11px] text-brand-100/50 gap-4">
+                <p>&copy; 2026 R PHYSIO CLINIC. All rights reserved. Inspired by world-class healthcare standards.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-[#d6a15d] transition">Privacy Policy</a>
+                    <a href="#" class="hover:text-[#d6a15d] transition">Terms of Service</a>
+                    <a href="#" class="hover:text-[#d6a15d] transition">Patient Portal</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+  <script>
+    const reviews = [
+      { quote: 'The team helped me get back to running without the pain I had for months.', name: 'Mrs. Nishu S.', detail: 'Sports recovery · Verified patient' },
+      { quote: 'Every session felt clear, supportive, and focused on what I actually needed.', name: 'Mr. Yash Mohite', detail: 'Mobility support · Verified patient' },
+      { quote: 'I finally have a plan I can follow and a stronger, more confident body.', name: 'Mr. Neel Phadol', detail: 'Pain management · Verified patient' },
+      { quote: 'After my shoulder injury, the progress was steady, measurable, and genuinely encouraging.', name: 'Ms. Rhea Kapoor', detail: 'Orthopaedic rehabilitation · Verified patient' },
+      { quote: 'The care felt personal from day one. I can now move through my workday comfortably again.', name: 'Mr. Arjun Mehta', detail: 'Posture and movement · Verified patient' },
+      { quote: 'A thoughtful team, a clear recovery plan, and results I could feel every single week.', name: 'Mrs. Kavita Rao', detail: 'Strength and conditioning · Verified patient' }
+    ];
+    const carousel = document.querySelector('#reviews-carousel');
+    const track = carousel.querySelector('.review-track');
+    let slides = Array.from(carousel.querySelectorAll('.review-card'));
+    const dots = carousel.querySelectorAll('.review-dot');
+    const previousButton = carousel.querySelector('#review-prev');
+    const nextButton = carousel.querySelector('#review-next');
+    const reviewCount = reviews.length;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let activeReview = 0;
+    let position = 0;
+    let animationFrame;
+    let lastFrame = performance.now();
+
+    slides.forEach((slide) => track.appendChild(slide.cloneNode(true)));
+    slides = Array.from(track.querySelectorAll('.review-card'));
+
+    function showReview(index) {
+      activeReview = (index + reviewCount) % reviewCount;
+      const slideWidth = slides[0].getBoundingClientRect().width;
+      const gap = parseFloat(getComputedStyle(track).gap);
+      position = activeReview * (slideWidth + gap);
+      track.style.transform = `translateX(${-position}px)`;
+      dots.forEach((dot, dotIndex) => {
+        const isActive = dotIndex === activeReview;
+        dot.classList.toggle('w-8', isActive);
+        dot.classList.toggle('w-2.5', !isActive);
+        dot.classList.toggle('bg-brand-800', isActive);
+        dot.classList.toggle('bg-brand-200', !isActive);
+        dot.setAttribute('aria-selected', isActive);
+      });
+    }
+
+    function moveReview(direction) {
+      const slideWidth = slides[0].getBoundingClientRect().width;
+      const gap = parseFloat(getComputedStyle(track).gap);
+      const step = slideWidth + gap;
+      const loopWidth = reviewCount * step;
+      position = (position + direction * step + loopWidth) % loopWidth;
+      activeReview = Math.round(position / step) % reviewCount;
+      track.style.transform = `translateX(${-position}px)`;
+      dots.forEach((dot, dotIndex) => {
+        const isActive = dotIndex === activeReview;
+        dot.classList.toggle('w-8', isActive);
+        dot.classList.toggle('w-2.5', !isActive);
+        dot.classList.toggle('bg-brand-800', isActive);
+        dot.classList.toggle('bg-brand-200', !isActive);
+        dot.setAttribute('aria-selected', isActive);
+      });
+    }
+
+    function animateTicker(timestamp) {
+      const slideWidth = slides[0].getBoundingClientRect().width;
+      const gap = parseFloat(getComputedStyle(track).gap);
+      const step = slideWidth + gap;
+      const loopWidth = reviewCount * step;
+      position = (position + (timestamp - lastFrame) * 0.060) % loopWidth;
+      track.style.transform = `translateX(${-position}px)`;
+      const nextReview = Math.floor(position / step) % reviewCount;
+      if (nextReview !== activeReview) {
+        activeReview = nextReview;
+        dots.forEach((dot, dotIndex) => {
+          const isActive = dotIndex === activeReview;
+          dot.classList.toggle('w-8', isActive);
+          dot.classList.toggle('w-2.5', !isActive);
+          dot.classList.toggle('bg-brand-800', isActive);
+          dot.classList.toggle('bg-brand-200', !isActive);
+          dot.setAttribute('aria-selected', isActive);
+        });
+      }
+      lastFrame = timestamp;
+      animationFrame = requestAnimationFrame(animateTicker);
+    }
+
+    previousButton.addEventListener('click', () => moveReview(-1));
+    nextButton.addEventListener('click', () => moveReview(1));
+    dots.forEach((dot, index) => dot.addEventListener('click', () => {
+      showReview(index);
+    }));
+    window.addEventListener('resize', () => {
+      const slideWidth = slides[0].getBoundingClientRect().width;
+      const gap = parseFloat(getComputedStyle(track).gap);
+      position = activeReview * (slideWidth + gap);
+      track.style.transform = `translateX(${-position}px)`;
+    });
+    showReview(0);
+    if (!reducedMotion) animationFrame = requestAnimationFrame(animateTicker);
+  </script>
+</body>
+</html>

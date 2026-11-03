@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services | R Physio Clinic</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Open Sans', 'sans-serif'] },
+          colors: {
+            brand: {
+              50: '#f5f7f5',
+              100: '#edf1ee',
+              200: '#dfe9df',
+              500: '#667a66',
+              600: '#4d604d',
+              700: '#394a39',
+              800: '#273727',
+              900: '#182518'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    img {
+      filter: sepia(0.22) saturate(1.35) contrast(1.08) brightness(0.96) hue-rotate(-12deg);
+    }
+    body {
+      background-image: url('webbgimage.webp');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(247, 245, 242, 0.93);
+      z-index: -1;
+    }
+    .service-card {
+      opacity: 0;
+      animation: service-card-in 700ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      text-align: center;
+    }
+    .service-card > div:first-child {
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .service-card h2 {
+      text-align: center;
+      font-size: 1.75rem !important;
+      line-height: 1.25;
+    }
+    .service-card ul {
+      max-width: 34rem;
+      max-height: 15rem;
+      margin-left: auto;
+      margin-right: auto;
+      padding-right: 0.75rem;
+      text-align: left;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #667a66 transparent;
+    }
+    .service-card ul::-webkit-scrollbar {
+      width: 5px;
+    }
+    .service-card ul::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .service-card ul::-webkit-scrollbar-thumb {
+      background: #667a66;
+      border-radius: 999px;
+    }
+    .service-card li {
+      position: relative;
+      padding-left: 1.5rem;
+      font-size: 1.125rem !important;
+      line-height: 1.6;
+    }
+    .service-card li::before {
+      content: "\f00c";
+      position: absolute;
+      left: 0;
+      top: 0.35rem;
+      color: #4d604d;
+      font-family: "Font Awesome 6 Free";
+      font-size: 0.75rem;
+      font-weight: 900;
+    }
+    .service-card:nth-child(2) { animation-delay: 100ms; }
+    .service-card:nth-child(3) { animation-delay: 180ms; }
+    .service-card:nth-child(4) { animation-delay: 260ms; }
+    .service-card:nth-child(5) { animation-delay: 340ms; }
+    .service-card:nth-child(6) { animation-delay: 420ms; }
+    .services-viewport {
+      overflow: hidden;
+    }
+    .services-track {
+      display: flex;
+      gap: 1.5rem;
+      transition: transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .services-slide {
+      flex: 0 0 calc(100% - 8rem);
+    }
+    @media (min-width: 768px) {
+      .services-slide {
+        flex-basis: calc(100% - 24rem);
+      }
+    }
+    @keyframes service-card-in {
+      from { opacity: 0; transform: translateY(22px) scale(0.98); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .service-card,
+      .services-track {
+        opacity: 1;
+        animation: none;
+        transition: none;
+      }
+    }
+    html { overflow-x: hidden; }
+    header > div:first-child > a:first-child { position: relative; width: 9rem; height: 3rem; align-items: center; }
+    .site-logo { position: absolute; left: 0; top: 50%; display: block; width: auto; height: 13rem; max-width: 14rem; object-fit: contain; transform: translateY(-50%); }
+    .mobile-menu { display: none; }
+    @media (max-width: 767px) {
+      body { background-attachment: scroll; }
+      header > div:first-child { padding: 0.75rem 1rem; display: block; position: relative; }
+      header > div:first-child > a:first-child { width: 7rem; height: 2.5rem; }
+      .site-logo { height: 10rem; max-width: 12rem; }
+      .mobile-menu { display: block; position: fixed; top: 0.75rem; right: 1rem; z-index: 50; width: 2.5rem; }
+      .mobile-menu summary { width: 2.5rem; height: 2.5rem; border-radius: 999px; background: #edf1ee; color: #273727; display: flex; align-items: center; justify-content: center; cursor: pointer; list-style: none; }
+      .mobile-menu summary::-webkit-details-marker { display: none; }
+      .mobile-menu summary i { font-size: 1.15rem; }
+      .mobile-nav { position: fixed; top: 0; left: 0; display: flex; flex-direction: column; gap: 0.5rem; padding: 5rem 1rem 1rem; width: min(17rem, 82vw); height: 100vh; border: 0; border-right: 1px solid #dfe9df; border-radius: 0; background: rgba(255, 255, 255, 0.98); box-shadow: 8px 0 30px rgba(24, 37, 24, 0.16); transform: translateX(-105%); transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1); will-change: transform; z-index: 49; }
+      .mobile-menu[open] .mobile-nav { transform: translateX(0); }
+      .mobile-drawer-logo { position: absolute; top: 0.75rem; left: 1rem; width: auto; height: 3.25rem; max-width: 6rem; object-fit: contain; }
+      .mobile-close { position: absolute; top: 1rem; right: 1rem; width: 2.5rem; height: 2.5rem; border: 0; border-radius: 999px; background: #edf1ee; color: #273727; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+      .mobile-close i { font-size: 1rem; }
+      .mobile-nav a { padding: 0.75rem 0.85rem; border-radius: 0.65rem; background: #edf1ee; color: #394a39; font-size: 1rem; text-align: left; font-weight: 600; }
+      .mobile-nav .mobile-appointment { margin-top: auto; background: #273727; color: #fff; text-align: center; font-weight: 600; }
+      .mobile-socials { display: flex; justify-content: center; gap: 0.65rem; padding-top: 0.75rem; border-top: 1px solid #dfe9df; }
+      .mobile-socials a { width: 2.25rem; height: 2.25rem; padding: 0; display: flex; align-items: center; justify-content: center; border-radius: 999px; background: #273727; color: #fff; text-align: center; }
+      main { padding-left: 1rem !important; padding-right: 1rem !important; padding-top: 3rem !important; padding-bottom: 3rem !important; }
+      main h1 { font-size: clamp(2.25rem, 11vw, 3rem) !important; line-height: 1.08 !important; overflow-wrap: anywhere; }
+      main h2 { overflow-wrap: anywhere; }
+      .services-slide { flex-basis: 100%; padding: 1.25rem !important; }
+      .service-card h2 { font-size: 1.35rem !important; }
+      .service-card li { font-size: 1rem !important; }
+      footer p { overflow-wrap: anywhere; }
+      footer .flex.space-x-6 { flex-wrap: wrap; justify-content: center; gap: 0.75rem 1.25rem; }
+    }
+  </style>
+</head>
+<body class="bg-[#f7f5f2] text-slate-800 font-sans">
+  <header class="border-b border-slate-200 bg-white/90 sticky top-0 z-40 backdrop-blur-sm">
+    <div class="max-w-7xl mx-auto px-5 py-4 grid grid-cols-[1fr_auto_1fr] items-center gap-4">
+      <a href="index.html" class="flex items-center gap-3 justify-self-start">
+        <img src="PhySio-optimized.png" alt="R Physio Clinic" class="site-logo" />
+      </a>
+      <nav class="hidden md:flex items-center gap-8 text-sm text-slate-600 justify-self-center">
+        <a href="index.html" class="hover:text-brand-800 transition">Home</a>
+        <a href="about.html" class="hover:text-brand-800 transition">About</a>
+        <a href="services.html" class="text-brand-800 font-medium">Services</a>
+        <a href="approach.html" class="hover:text-brand-800 transition">Approach</a>
+        <a href="contact.html" class="hover:text-brand-800 transition">Contact</a>
+      </nav>
+      <a href="contact.html" class="hidden sm:inline-flex items-center gap-2 rounded-full border border-brand-700 text-brand-800 px-4 py-2 text-sm font-medium hover:bg-brand-800 hover:text-white transition justify-self-end">Book an appointment</a>
+    </div>
+    <details class="mobile-menu">
+      <summary aria-label="Open navigation menu"><i class="fa-solid fa-ellipsis-vertical" aria-hidden="true"></i></summary>
+      <nav class="mobile-nav" aria-label="Mobile navigation">
+        <button type="button" class="mobile-close" onclick="this.closest('details').open = false;" aria-label="Close navigation menu"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+        <img src="PhySionew-optimized.png" alt="R Physio Clinic" class="mobile-drawer-logo" />
+        <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="approach.html">Approach</a><a href="contact.html">Contact</a>
+        <a href="contact.html" class="mobile-appointment">Book an appointment</a>
+        <div class="mobile-socials" aria-label="Social media links">
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
+        </div>
+      </nav>
+    </details>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-5 py-16 md:py-20">
+    <section class="text-center max-w-3xl mx-auto">
+      <p class="text-[11px] uppercase tracking-[0.2em] text-brand-600 font-semibold">R PHYSIO CLINIC — SERVICES</p>
+      <h1 class="mt-3 text-4xl md:text-5xl font-bold tracking-[-0.06em] text-brand-900">Complete physiotherapy care for confident movement.</h1>
+      <p class="mt-6 text-lg text-slate-600 leading-8">From comprehensive assessment and hands-on treatment to performance training and specialised rehabilitation, our services are designed around your recovery goals, comfort, and long-term progress.</p>
+    </section>
+
+    <section id="services-carousel" class="mt-16">
+      <div class="flex items-center gap-3 md:gap-5">
+        <button id="services-prev" type="button" class="shrink-0 w-11 h-11 md:w-12 md:h-12 rounded-full border border-brand-200 bg-white text-brand-800 shadow-sm hover:bg-brand-800 hover:text-white transition" aria-label="Previous service category"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
+        <div class="services-viewport min-w-0 flex-1">
+          <div class="services-track">
+      <div class="services-slide service-card group bg-white/90 border border-slate-200 rounded-[2rem] p-7 md:p-8 shadow-sm hover:shadow-[0_18px_50px_rgba(23,37,24,0.12)] hover:-translate-y-1 transition duration-300">
+        <div class="w-12 h-12 rounded-xl bg-brand-100 text-brand-800 flex items-center justify-center mb-5 group-hover:bg-brand-800 group-hover:text-white transition"><i class="fa-solid fa-person-running"></i></div>
+        <h2 class="text-2xl font-semibold text-brand-900">Musculoskeletal &amp; Sports Rehabilitation</h2>
+        <ul class="mt-6 space-y-3 text-sm text-slate-600 leading-6"><li>Comprehensive MSK Injury Assessment</li><li>Sports Injury Rehabilitation</li><li>Acute &amp; Chronic Pain Management</li><li>Post-operative Rehabilitation</li><li>Return-to-Sport Rehabilitation</li><li>Functional Movement Assessment</li></ul>
+      </div>
+
+      <div class="services-slide service-card group bg-white/90 border border-slate-200 rounded-[2rem] p-7 md:p-8 shadow-sm hover:shadow-[0_18px_50px_rgba(23,37,24,0.12)] hover:-translate-y-1 transition duration-300">
+        <div class="w-12 h-12 rounded-xl bg-brand-100 text-brand-800 flex items-center justify-center mb-5 group-hover:bg-brand-800 group-hover:text-white transition"><i class="fa-solid fa-bed-pulse"></i></div>
+        <h2 class="text-2xl font-semibold text-brand-900">Manual &amp; Hands-on Therapy</h2>
+        <ul class="mt-6 space-y-3 text-sm text-slate-600 leading-6"><li>Manual Therapy</li><li>Joint Mobilization</li><li>Soft Tissue Mobilization</li><li>Myofascial Release</li><li>Fascial Manipulation</li><li>Osteopathic Techniques</li><li>Muscle Energy Techniques</li><li>Trigger Point Therapy</li></ul>
+      </div>
+
+      <div class="services-slide service-card group bg-white/90 border border-slate-200 rounded-[2rem] p-7 md:p-8 shadow-sm hover:shadow-[0_18px_50px_rgba(23,37,24,0.12)] hover:-translate-y-1 transition duration-300">
+        <div class="w-12 h-12 rounded-xl bg-brand-100 text-brand-800 flex items-center justify-center mb-5 group-hover:bg-brand-800 group-hover:text-white transition"><i class="fa-solid fa-spa"></i></div>
+        <h2 class="text-2xl font-semibold text-brand-900">Needling &amp; Taping</h2>
+        <ul class="mt-6 space-y-3 text-sm text-slate-600 leading-6"><li>Dry Needling</li><li>Trigger Point Needling</li><li>Kinesio Taping</li><li>Sports Taping</li><li>Rigid/Supportive Taping</li></ul>
+      </div>
+
+      <div class="services-slide service-card group bg-white/90 border border-slate-200 rounded-[2rem] p-7 md:p-8 shadow-sm hover:shadow-[0_18px_50px_rgba(23,37,24,0.12)] hover:-translate-y-1 transition duration-300">
+        <div class="w-12 h-12 rounded-xl bg-brand-100 text-brand-800 flex items-center justify-center mb-5 group-hover:bg-brand-800 group-hover:text-white transition"><i class="fa-solid fa-heart-pulse"></i></div>
+        <h2 class="text-2xl font-semibold text-brand-900">Electro &amp; Physical Modalities</h2>
+        <ul class="mt-6 space-y-3 text-sm text-slate-600 leading-6"><li>TENS</li><li>IFT</li><li>Ultrasound Therapy</li><li>Electrical Muscle Stimulation</li><li>Heat &amp; Cold Therapy</li><li>Shockwave Therapy (if available)</li><li>Compression/Recovery Therapy (if available)</li></ul>
+      </div>
+
+      <div class="services-slide service-card group bg-white/90 border border-slate-200 rounded-[2rem] p-7 md:p-8 shadow-sm hover:shadow-[0_18px_50px_rgba(23,37,24,0.12)] hover:-translate-y-1 transition duration-300">
+        <div class="w-12 h-12 rounded-xl bg-brand-100 text-brand-800 flex items-center justify-center mb-5 group-hover:bg-brand-800 group-hover:text-white transition"><i class="fa-solid fa-briefcase-medical"></i></div>
+        <h2 class="text-2xl font-semibold text-brand-900">Strength, Conditioning &amp; Functional Training</h2>
+        <ul class="mt-6 space-y-3 text-sm text-slate-600 leading-6"><li>Corrective Exercise</li><li>Functional Training</li><li>Strength &amp; Conditioning</li><li>Sports Performance Training</li><li>Mobility &amp; Flexibility Training</li><li>Core &amp; Stability Training</li><li>Balance &amp; Proprioception Training</li><li>Injury Prevention Programs</li><li>Return-to-Performance Programs</li></ul>
+      </div>
+
+      <div class="services-slide service-card group bg-white/90 border border-slate-200 rounded-[2rem] p-7 md:p-8 shadow-sm hover:shadow-[0_18px_50px_rgba(23,37,24,0.12)] hover:-translate-y-1 transition duration-300">
+        <div class="w-12 h-12 rounded-xl bg-brand-100 text-brand-800 flex items-center justify-center mb-5 group-hover:bg-brand-800 group-hover:text-white transition"><i class="fa-solid fa-user-doctor"></i></div>
+        <h2 class="text-2xl font-semibold text-brand-900">Specialized Rehabilitation</h2>
+        <ul class="mt-6 space-y-3 text-sm text-slate-600 leading-6"><li>ACL &amp; Knee Rehabilitation</li><li>Shoulder Rehabilitation</li><li>Ankle &amp; Foot Rehabilitation</li><li>Hamstring &amp; Groin Rehabilitation</li><li>Back &amp; SI Joint Rehabilitation</li><li>Tendon Rehabilitation</li><li>Fracture Rehabilitation</li><li>Post-surgical Rehabilitation</li><li>Running &amp; Sports Injury Rehabilitation</li></ul>
+      </div>
+      <div class="services-slide service-card group bg-white/90 border border-slate-200 rounded-[2rem] p-7 md:p-8 shadow-sm hover:shadow-[0_18px_50px_rgba(23,37,24,0.12)] hover:-translate-y-1 transition duration-300">
+        <div class="w-12 h-12 rounded-xl bg-brand-100 text-brand-800 flex items-center justify-center mb-5 group-hover:bg-brand-800 group-hover:text-white transition"><i class="fa-solid fa-person-circle-check"></i></div>
+        <h2 class="text-2xl font-semibold text-brand-900">Wellness &amp; Prevention</h2>
+        <ul class="mt-6 space-y-3 text-sm text-slate-600 leading-6"><li>Injury Prevention Programs</li><li>Posture Screening</li><li>Ergonomic Assessment</li><li>Movement Health Check</li><li>Lifestyle Exercise Guidance</li><li>Long-term Mobility Planning</li></ul>
+      </div>
+
+      <div class="services-slide service-card group bg-white/90 border border-slate-200 rounded-[2rem] p-7 md:p-8 shadow-sm hover:shadow-[0_18px_50px_rgba(23,37,24,0.12)] hover:-translate-y-1 transition duration-300">
+        <div class="w-12 h-12 rounded-xl bg-brand-100 text-brand-800 flex items-center justify-center mb-5 group-hover:bg-brand-800 group-hover:text-white transition"><i class="fa-solid fa-person-walking-arrow-right"></i></div>
+        <h2 class="text-2xl font-semibold text-brand-900">Return to Daily Life</h2>
+        <ul class="mt-6 space-y-3 text-sm text-slate-600 leading-6"><li>Daily Movement Retraining</li><li>Work Readiness Programs</li><li>Confidence-building Exercise</li><li>Functional Independence Training</li><li>Activity Modification Guidance</li><li>Home Exercise Planning</li></ul>
+      </div>
+
+      <div class="services-slide service-card group bg-white/90 border border-slate-200 rounded-[2rem] p-7 md:p-8 shadow-sm hover:shadow-[0_18px_50px_rgba(23,37,24,0.12)] hover:-translate-y-1 transition duration-300">
+        <div class="w-12 h-12 rounded-xl bg-brand-100 text-brand-800 flex items-center justify-center mb-5 group-hover:bg-brand-800 group-hover:text-white transition"><i class="fa-solid fa-chart-line"></i></div>
+        <h2 class="text-2xl font-semibold text-brand-900">Performance &amp; Progress</h2>
+        <ul class="mt-6 space-y-3 text-sm text-slate-600 leading-6"><li>Baseline Performance Testing</li><li>Progress Re-assessment</li><li>Goal-based Programming</li><li>Sports Performance Planning</li><li>Strength Progression</li><li>Return-to-Performance Testing</li></ul>
+      </div>
+          </div>
+        </div>
+        <button id="services-next" type="button" class="shrink-0 w-11 h-11 md:w-12 md:h-12 rounded-full border border-brand-200 bg-white text-brand-800 shadow-sm hover:bg-brand-800 hover:text-white transition" aria-label="Next service category"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+      </div>
+      <div class="mt-6 flex items-center justify-center gap-3" role="tablist" aria-label="Service categories">
+        <button class="service-dot h-2.5 w-8 rounded-full bg-brand-800 transition-all" type="button" role="tab" aria-label="Show service category 1" aria-selected="true"></button>
+        <button class="service-dot h-2.5 w-2.5 rounded-full bg-brand-200 transition-all" type="button" role="tab" aria-label="Show service category 2" aria-selected="false"></button>
+        <button class="service-dot h-2.5 w-2.5 rounded-full bg-brand-200 transition-all" type="button" role="tab" aria-label="Show service category 3" aria-selected="false"></button>
+        <button class="service-dot h-2.5 w-2.5 rounded-full bg-brand-200 transition-all" type="button" role="tab" aria-label="Show service category 4" aria-selected="false"></button>
+        <button class="service-dot h-2.5 w-2.5 rounded-full bg-brand-200 transition-all" type="button" role="tab" aria-label="Show service category 5" aria-selected="false"></button>
+        <button class="service-dot h-2.5 w-2.5 rounded-full bg-brand-200 transition-all" type="button" role="tab" aria-label="Show service category 6" aria-selected="false"></button>
+        <button class="service-dot h-2.5 w-2.5 rounded-full bg-brand-200 transition-all" type="button" role="tab" aria-label="Show service category 7" aria-selected="false"></button>
+        <button class="service-dot h-2.5 w-2.5 rounded-full bg-brand-200 transition-all" type="button" role="tab" aria-label="Show service category 8" aria-selected="false"></button>
+        <button class="service-dot h-2.5 w-2.5 rounded-full bg-brand-200 transition-all" type="button" role="tab" aria-label="Show service category 9" aria-selected="false"></button>
+      </div>
+    </section>
+
+    <section class="mt-20 bg-brand-900 rounded-[2rem] text-white p-8 md:p-12">
+      <div class="grid md:grid-cols-2 gap-8 items-center">
+        <div>
+          <p class="text-[11px] uppercase tracking-[0.2em] text-brand-200 font-semibold">Treatment process</p>
+          <h2 class="mt-3 text-3xl font-bold tracking-[-0.05em]">A simple step-by-step plan.</h2>
+        </div>
+        <div class="space-y-5">
+          <div class="flex gap-4">
+            <div class="w-8 h-8 rounded-full bg-white text-brand-900 flex items-center justify-center font-semibold">1</div>
+            <div><h3 class="font-semibold">Assessment</h3><p class="text-brand-100 mt-1">We evaluate your movement, symptoms, and daily demands.</p></div>
+          </div>
+          <div class="flex gap-4">
+            <div class="w-8 h-8 rounded-full bg-white text-brand-900 flex items-center justify-center font-semibold">2</div>
+            <div><h3 class="font-semibold">Tailored treatment</h3><p class="text-brand-100 mt-1">We build a plan that targets the cause and supports recovery.</p></div>
+          </div>
+          <div class="flex gap-4">
+            <div class="w-8 h-8 rounded-full bg-white text-brand-900 flex items-center justify-center font-semibold">3</div>
+            <div><h3 class="font-semibold">Progress tracking</h3><p class="text-brand-100 mt-1">We review results and adjust care as you improve.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact" class="bg-brand-900 text-white border-t border-brand-800 pt-10 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-brand-700/60">
+
+                <!-- Branding Info -->
+                <div class="lg:col-span-4 space-y-3">
+                    <div class="flex items-center">
+                      <img src="Whitelogo.png" alt="R Physio Clinic" class="h-30 w-auto max-w-[11rem] object-contain" />
+                    </div>
+                    <p class="text-xs text-brand-100/70 leading-relaxed">
+                        Dedicated to advanced clinical rehabilitation, sports trauma recovery, and osteopathic bodywork.
+                        Restoring physical confidence through evidence-based care.
+                    </p>
+                    <div class="flex space-x-3 text-brand-100/70 pt-2">
+                        <a href="#"
+                            class="w-9 h-9 rounded-full bg-brand-800 flex items-center justify-center hover:bg-[#8f4a1b] hover:text-white transition"><i
+                                class="fa-brands fa-facebook-f text-xs"></i></a>
+                        <a href="#"
+                            class="w-9 h-9 rounded-full bg-brand-800 flex items-center justify-center hover:bg-[#8f4a1b] hover:text-white transition"><i
+                                class="fa-brands fa-instagram text-xs"></i></a>
+                        <a href="#"
+                            class="w-9 h-9 rounded-full bg-brand-800 flex items-center justify-center hover:bg-[#8f4a1b] hover:text-white transition"><i
+                                class="fa-brands fa-youtube text-xs"></i></a>
+                        <a href="#"
+                            class="w-9 h-9 rounded-full bg-brand-800 flex items-center justify-center hover:bg-[#8f4a1b] hover:text-white transition"><i
+                                class="fa-brands fa-linkedin-in text-xs"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="lg:col-span-2 space-y-3">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-[#d6a15d]">Quick Links</h4>
+                    <ul class="space-y-2 text-xs text-brand-100/80">
+                        <li><a href="about.html" class="hover:text-white transition">About R Physio</a></li>
+                        <li><a href="services.html" class="hover:text-white transition">All Services</a></li>
+                        <li><a href="approach.html" class="hover:text-white transition">Our Care Approach</a></li>
+                        <li><a href="contact.html" class="hover:text-white transition">Clinic Information</a></li>
+                        
+                    </ul>
+                </div>
+
+                <!-- Contact & Hours -->
+                <div class="lg:col-span-3 space-y-3">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-[#d6a15d]">Clinic Hours & Contact</h4>
+                    <ul class="space-y-2.5 text-xs text-brand-100/80">
+                        <li class="flex items-start"><i
+                                class="fa-solid fa-location-dot text-brand-500 mr-2.5 mt-0.5"></i> 5th floor, Shree ganesh universe, pipeline road, Gangapur Rd, Nashik, Maharashtra 422013</li>
+                        <li class="flex items-center"><i class="fa-solid fa-phone text-brand-500 mr-2.5"></i> +91 9130341817</li>
+                        <li class="flex items-center"><i class="fa-solid fa-envelope text-brand-500 mr-2.5"></i>
+                            care@rphysioclinic.com</li>
+                        <li class="flex items-center"><i class="fa-solid fa-clock text-brand-500 mr-2.5"></i> Mon - Sat:
+                            8:00 AM - 8:00 PM</li>
+                    </ul>
+                </div>
+
+                <!-- Map Placeholder -->
+                <div class="lg:col-span-3 space-y-3">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-[#d6a15d]">Location Map</h4>
+                    <a href="https://www.google.com/maps/place/R+Physio+care/@20.0100802,73.7436304,18.27z/data=!4m6!3m5!1s0x3bdded4e843d896f:0xeb2937d9f452d52d!8m2!3d20.0099227!4d73.744668!16s%2Fg%2F11p1bwzsr7!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDkyMy4wIKXMDSoASAFQAw%3D%3D" aria-label="Open R Physio Clinic in Google Maps"
+                      class="rounded-2xl overflow-hidden border border-brand-700 bg-brand-800 h-32 flex items-center justify-center relative group">
+                        <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=400&q=80"
+                            alt="Map Location"
+                            class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition duration-500">
+                        <div class="absolute inset-0 bg-brand-900/55 flex items-center justify-center">
+                            <span
+                                class="text-xs font-semibold px-3 py-1.5 rounded-full bg-brand-900/85 text-white border border-brand-700">
+                                <i class="fa-solid fa-map-pin text-rose-500 mr-1"></i> Open Google Maps
+                            </span>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Bottom Copyright -->
+            <div class="pt-8 flex flex-col sm:flex-row justify-between items-center text-[11px] text-brand-100/50 gap-4">
+                <p>&copy; 2026 R PHYSIO CLINIC. All rights reserved. Inspired by world-class healthcare standards.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-[#d6a15d] transition">Privacy Policy</a>
+                    <a href="#" class="hover:text-[#d6a15d] transition">Terms of Service</a>
+                    <a href="#" class="hover:text-[#d6a15d] transition">Patient Portal</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+      const servicesCarousel = document.querySelector('#services-carousel');
+      const servicesTrack = servicesCarousel.querySelector('.services-track');
+      const serviceSlides = servicesCarousel.querySelectorAll('.services-slide');
+      const serviceDots = servicesCarousel.querySelectorAll('.service-dot');
+      const servicesPrevious = servicesCarousel.querySelector('#services-prev');
+      const servicesNext = servicesCarousel.querySelector('#services-next');
+      let activeService = 0;
+      let serviceRotation;
+
+      function showService(index) {
+        activeService = (index + serviceSlides.length) % serviceSlides.length;
+        const slideWidth = serviceSlides[0].getBoundingClientRect().width;
+        const gap = parseFloat(getComputedStyle(servicesTrack).gap);
+        const viewportWidth = servicesTrack.parentElement.getBoundingClientRect().width;
+        const sidePreview = Math.max((viewportWidth - slideWidth) / 2, 0);
+        servicesTrack.style.transform = `translateX(${sidePreview - activeService * (slideWidth + gap)}px)`;
+        serviceDots.forEach((dot, dotIndex) => {
+          const isActive = dotIndex === activeService;
+          dot.classList.toggle('w-8', isActive);
+          dot.classList.toggle('w-2.5', !isActive);
+          dot.classList.toggle('bg-brand-800', isActive);
+          dot.classList.toggle('bg-brand-200', !isActive);
+          dot.setAttribute('aria-selected', isActive);
+        });
+      }
+
+      function startServiceRotation() {
+        clearInterval(serviceRotation);
+        serviceRotation = setInterval(() => showService(activeService + 1), 5500);
+      }
+
+      function moveService(direction) {
+        showService(activeService + direction);
+        startServiceRotation();
+      }
+
+      servicesPrevious.addEventListener('click', () => moveService(-1));
+      servicesNext.addEventListener('click', () => moveService(1));
+      serviceDots.forEach((dot, index) => dot.addEventListener('click', () => {
+        showService(index);
+        startServiceRotation();
+      }));
+      servicesCarousel.addEventListener('mouseenter', () => clearInterval(serviceRotation));
+      servicesCarousel.addEventListener('mouseleave', startServiceRotation);
+      window.addEventListener('resize', () => showService(activeService));
+      showService(0);
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) startServiceRotation();
+    </script>
+</body>
+</html>
